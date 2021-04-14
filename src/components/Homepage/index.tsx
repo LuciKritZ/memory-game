@@ -15,11 +15,14 @@ import {
     Button,
     InputLabel,
     FormHelperText,
+    Link,
 } from '@material-ui/core';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import GameCard from '../Card/index';
-import './style.css';
+import { useStyles } from './style';
 
 const Homepage = (): ReactElement => {
+    const styles = useStyles();
     const frameworks = [
         'angular2',
         'vue',
@@ -37,7 +40,6 @@ const Homepage = (): ReactElement => {
         'bower',
         'browserify',
     ];
-    const [isProductPositive, setIsProductPositive] = React.useState(false);
     const [rows, setRows] = React.useState(1);
     const [columns, setColumns] = React.useState(2);
     const [totalCards, setTotalCards] = React.useState(1);
@@ -69,10 +71,8 @@ const Homepage = (): ReactElement => {
     React.useEffect(() => {
         setTotalCards(rows * columns);
         if (rows * columns === 0 || (rows * columns) % 2 !== 0 || rows * columns > 100 || rows > 10 || columns > 10) {
-            setIsProductPositive(true);
             setError(true);
         } else {
-            setIsProductPositive(false);
             setError(false);
         }
     }, [rows, columns]);
@@ -157,21 +157,21 @@ const Homepage = (): ReactElement => {
     const showOptions = (): ReactElement => {
         return (
             <Grid container alignItems="center" className="options-container">
-                <Grid container item xs={12} alignItems="center" justify="center">
+                {/* <Grid container item xs={12} alignItems="center" justify="center">
                     <Typography variant="h6" className="options-heading-container">
                         Choose options from:
                     </Typography>
-                </Grid>
+                </Grid> */}
                 <Grid
                     container
                     item
                     xs={12}
-                    lg={4}
+                    lg={6}
                     justify="center"
                     alignItems="center"
                     className="text-field-container"
                 >
-                    <Grid container item xs={12} justify="center" alignItems="center">
+                    <Grid container item xs={12} justify="center" alignItems="center" className="input-grid-container">
                         <TextField
                             InputLabelProps={{
                                 classes: { root: 'input-container', error: 'input-container-error' },
@@ -184,6 +184,7 @@ const Homepage = (): ReactElement => {
                                     setRows(0);
                                 }
                             }}
+                            classes={{ root: 'text-field' }}
                             type="number"
                             placeholder="Enter rows"
                             label="Enter rows"
@@ -191,7 +192,14 @@ const Homepage = (): ReactElement => {
                         />
                     </Grid>
                     {error && (rows > 10 || rows === 0) && (
-                        <Grid container item xs={12} justify="center" alignItems="center">
+                        <Grid
+                            container
+                            item
+                            xs={12}
+                            justify="center"
+                            alignItems="center"
+                            className="error-grid-container"
+                        >
                             <FormHelperText className="input-container-error">
                                 Rows can&apos;t be {rows === 0 ? '0' : 'more than 10'}.
                             </FormHelperText>
@@ -202,12 +210,12 @@ const Homepage = (): ReactElement => {
                     container
                     item
                     xs={12}
-                    lg={4}
+                    lg={6}
                     justify="center"
                     alignItems="center"
                     className="text-field-container"
                 >
-                    <Grid container item xs={12} justify="center" alignItems="center">
+                    <Grid container item xs={12} justify="center" alignItems="center" className="input-grid-container">
                         <TextField
                             InputLabelProps={{
                                 classes: { root: 'input-container', error: 'input-container-error' },
@@ -221,6 +229,7 @@ const Homepage = (): ReactElement => {
                                     setColumns(0);
                                 }
                             }}
+                            classes={{ root: 'text-field' }}
                             type="number"
                             placeholder="Enter columns"
                             label="Enter columns"
@@ -228,14 +237,21 @@ const Homepage = (): ReactElement => {
                         />
                     </Grid>
                     {error && (columns > 10 || columns === 0) && (
-                        <Grid container item xs={12} justify="center" alignItems="center">
+                        <Grid
+                            container
+                            item
+                            xs={12}
+                            justify="center"
+                            alignItems="center"
+                            className="error-grid-container"
+                        >
                             <FormHelperText className="input-container-error">
-                                Columns can&apos;t {columns === 0 ? '0' : 'more than 10'}.
+                                Columns can&apos;t be {columns === 0 ? '0' : 'more than 10'}.
                             </FormHelperText>
                         </Grid>
                     )}
                 </Grid>
-                <Grid container item xs={12} lg={4} justify="center" alignItems="center">
+                <Grid container item xs={12} lg={12} justify="center" alignItems="center" className="button-container">
                     <Button
                         disabled={error}
                         classes={{
@@ -248,7 +264,7 @@ const Homepage = (): ReactElement => {
                             start();
                         }}
                     >
-                        Play!
+                        <ExpandMoreIcon className="arrow-icon" />
                     </Button>
                 </Grid>
             </Grid>
@@ -276,12 +292,14 @@ const Homepage = (): ReactElement => {
     };
 
     return (
-        <div className="homepage-container">
+        <div className={styles.root}>
             <AppBar>
                 <Toolbar className="toolbar">
-                    <Typography variant="h6" className="toolbar-heading">
-                        Memory Game
-                    </Typography>
+                    <Link href="/" className="toolbar-link">
+                        <Typography variant="h6" className="toolbar-heading">
+                            Memory Game
+                        </Typography>
+                    </Link>
                 </Toolbar>
             </AppBar>
             {!isGameStarted ? showOptions() : showCards()}

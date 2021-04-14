@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import './App.css';
 import Homepage from './components/Homepage/index';
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-const App = () => {
+const App = (): ReactElement => {
     return (
         <div className="App">
             <Homepage />
