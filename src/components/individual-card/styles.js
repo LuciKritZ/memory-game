@@ -1,4 +1,5 @@
 import { makeStyles } from '@material-ui/core';
+import { themeColors } from '../common/styles';
 
 const useStyles = makeStyles({
   root: {
@@ -12,6 +13,27 @@ const useStyles = makeStyles({
     transition: '0.6s',
     transformStyle: 'preserve-3d',
     position: 'relative',
+    minWidth: '120px',
+    margin: '15px',
+    '& .question-mark': {
+      justifyContent: 'center',
+      alignItems: 'center',
+      display: 'flex',
+      backgroundColor: themeColors.grey,
+      height: '110px',
+      width: '100%',
+      borderRadius: '5px',
+      cursor: 'pointer',
+      '& p': {
+        fontSize: '50px',
+        lineHeight: '120px',
+        color: themeColors.blue,
+      },
+    },
+    '& .unclickable': {
+      pointerEvents: 'none',
+      cursor: 'default',
+    },
     '& .div-container': {
       backfaceVisibility: 'hidden',
       position: 'absolute',
@@ -40,13 +62,12 @@ const useStyles = makeStyles({
       '& img': {
         verticalAlign: 'middle',
         width: '70%',
-      }
-    },
-    '& .opened': {
-      transform: 'rotateY(180deg)',
+      },
+      '& .image-still-loading': {
+        display: 'none',
+      },
     },
     '& .matched': {
-      transform: 'rotateY(180deg)',
       '& .back': {
         boxShadow: '0 0 0 2px rgba(#000,.05) inset',
         animation: '$selected .8s 0s ease 1',

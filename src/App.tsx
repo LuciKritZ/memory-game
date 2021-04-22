@@ -12,7 +12,7 @@ const App = (): ReactElement => {
   useEffect(() => {
     const mount = () => {
       const username = localStorage.getItem('username');
-      if(username !== null && username !== undefined && username !== '') {
+      if (username !== null && username !== undefined && username !== '') {
         setIsLoggedIn(true);
       } else {
         setIsLoggedIn(false);
@@ -31,12 +31,12 @@ const App = (): ReactElement => {
   };
 
   if (loading) {
-    return <Loader fullScreen />;
+    return <Loader fullScreen defaultColor={false} />;
   }
-  
+
   return (
     <div className={styles.root}>
-      {isLoggedIn ? <Playground />: <Login onSubmit={onSubmit} />}
+      {isLoggedIn ? <Playground /> : <Login onSubmit={onSubmit} />}
     </div>
   );
 }

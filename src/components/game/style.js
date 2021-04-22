@@ -8,6 +8,13 @@ const useStyles = makeStyles({
     display: 'flex',
     height: '100vh',
     background: 'linear-gradient(90deg, #8E2DE2, #4A00E0)',
+    '& .user-name-heading': {
+      color: 'white',
+      fontSize: '20px',
+      '& p': {
+        fontSize: '5vh',
+      },
+    },
     '& .game-container': {
       backgroundColor: themeColors.yellow,
       justifyContent: 'center',
@@ -18,6 +25,10 @@ const useStyles = makeStyles({
       maxWidth: '600px',
       maxHeight: '600px',
       borderRadius: '15px',
+      '@media (max-width: 600px)' : {
+        maxWidth: '360px',
+        width: '85vw',
+      },
       '& .game-name-heading': {
         backgroundColor: themeColors.green,
         height: '15%',
@@ -26,9 +37,15 @@ const useStyles = makeStyles({
         alignItems: 'center',
         borderRadius: '15px 15px 0px 75%',
         padding: '40px',
+        '@media (max-width: 600px)' : {
+          padding: '20px',
+        },
         '& p': {
           fontSize: 35,
           color: 'white',
+          '@media (max-width: 600px)' : {
+            fontSize: 20,
+          },
         },
       },
       '& .game-box-input': {
@@ -52,10 +69,17 @@ const useStyles = makeStyles({
         backgroundColor: themeColors.red,
         borderRadius: '0px 75% 15px 15px',
         paddingBottom: '15px',
+        '@media (max-width: 600px)' : {
+          paddingBottom: '10px',
+        },
         '& .play-btn-root': {
           color: 'white',
           fontSize: 20,
           margin: '0px 20px',
+          '@media (max-width: 600px)' : {
+            fontSize: 17,
+            margin: '0px 14px',
+          },
         },
         '& .play-btn-disabled': {
           opacity: 0.5,
