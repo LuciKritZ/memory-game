@@ -14,10 +14,9 @@ const IndividualCard = ({ close, complete, click, framework }: Props): ReactElem
   const [closed, setClosed] = useState(close);
 
   useEffect(() => {
-    console.log('Iddhar');
     setClosed(close);
   }, [close, complete, click, framework]);
-  
+
   const styles = useStyles();
 
   /**
@@ -26,7 +25,6 @@ const IndividualCard = ({ close, complete, click, framework }: Props): ReactElem
    * @return {void}
   */
   const clicked = (framework: string): void => {
-    console.log(close, complete);
     if (close) {
       setClosed(false);
     }
@@ -44,14 +42,15 @@ const IndividualCard = ({ close, complete, click, framework }: Props): ReactElem
           !closed || (closed && complete) ? (
             <div className="">
               <img
-                src={`https://raw.githubusercontent.com/samiheikki/javascript-guessing-game/master/static/logos/${framework}.png`}
+                className="image-loaded"
+                src={`${process.env.PUBLIC_URL}/assets/logos/${framework}.png`}
                 alt={framework}
               />
             </div>
           ) : (
-            <div className="">
-              ?
-            </div>
+            <Grid xs={12} className="question-mark">
+              <p>?</p>
+            </Grid>
           )
         }
       </Grid>

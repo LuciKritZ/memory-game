@@ -18,11 +18,18 @@ const Playground = (): ReactElement => {
   };
 
   if (loading) {
-    return <Loader fullScreen />;
+    return <Loader fullScreen defaultColor={false} />;
   };
 
   return (
-    isGameBegun ? <Card numberOfCards={numberOfCards} startTime={startTime} /> : <Game startGame={startGame} />
+    isGameBegun ? <Card
+      playAgain={() => setIsGameBegun(false)}
+      numberOfCards={numberOfCards}
+      startTime={startTime}
+    /> :
+      <Game
+        startGame={startGame}
+      />
   );
 };
 

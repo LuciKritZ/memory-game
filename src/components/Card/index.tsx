@@ -1,12 +1,14 @@
 import React, { ReactElement, useState, useEffect } from 'react';
 import { typesOfCards } from '../utils/constants';
 import IndividualCard from '../individual-card/index';
-import { Grid } from '@material-ui/core';
+import { Grid, Button } from '@material-ui/core';
 import useStyles from './styles';
+import clsx from 'clsx';
 
 type Props = {
   numberOfCards: number;
   startTime: Date;
+  playAgain: () => void;
 };
 
 type CardType = {
@@ -21,13 +23,13 @@ type FrameworkType = {
   index: number;
 };
 
-const Card = ({ numberOfCards, startTime }: Props): ReactElement => {
+const Card = ({ numberOfCards, startTime, playAgain }: Props): ReactElement => {
   const [finalizedCards, setFinalizedCards] = useState<Array<CardType>>([]);
   const [openedCards, setOpenedCards] = useState<Array<FrameworkType>>([]);
   const [endTime, setEndTime] = useState<Date>(new Date());
   const [isGameEnded, setIsGameEnded] = useState(false);
   const styles = useStyles();
-  
+
   /** 
     * This function is used to do the comparison of the elements present in the openedCards array.
     * @return {void}
@@ -143,9 +145,8 @@ const Card = ({ numberOfCards, startTime }: Props): ReactElement => {
   }
 
   useEffect((): void => {
-    console.log('Started');
     start();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const getTotalTimeTaken = (): number => {
@@ -158,25 +159,27 @@ const Card = ({ numberOfCards, startTime }: Props): ReactElement => {
     return seconds;
   };
 
-  if (isGameEnded) {
-    return (
-      <h1>{`You've completed the game in ${getTotalTimeTaken()} seconds for ${numberOfCards} cards.`}</h1>
-    );
-  }
-  
   return (
     <Grid container className={styles.root}>
-      {finalizedCards.map((framework: CardType, index: number): ReactElement => {
-        return (
-          <IndividualCard
-            framework={framework.name}
-            click={() => handleClick(framework.name, index)}
-            close={framework.close}
-            complete={framework.complete}
-          />
-        );
-      })}
-    </Grid>
+      <Grid xs={12} className={clsx("playground-container")}>
+        {isGameEnded && (
+          <Grid item xs={12}>
+            <h1>{`You've completed the game in ${getTotalTimeTaken()} seconds for ${numberOfCards} cards.`}</h1>
+            <Button onClick={playAgain}>Play Again</Button>
+          </Grid>
+        )}
+        {!isGameEnded && finalizedCards.map((framework: CardType, index: number): ReactElement => {
+          return (
+            <IndividualCard
+              framework={framework.name}
+              click={() => handleClick(framework.name, index)}
+              close={framework.close}
+              complete={framework.complete}
+            />
+          );
+        })}
+      </Grid>
+    </Grid >
   );
 };
 

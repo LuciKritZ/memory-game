@@ -9,6 +9,11 @@ var Game = function (_a) {
     var _b = react_1.useState(0), numberOfCards = _b[0], setNumberOfCards = _b[1];
     var _c = react_1.useState(false), error = _c[0], setError = _c[1];
     return (react_1["default"].createElement(core_1.Grid, { container: true, className: styles.root },
+        react_1["default"].createElement(core_1.Grid, { item: true, xs: 12, className: "user-name-heading" },
+            react_1["default"].createElement(core_1.Typography, { component: "p" },
+                "Welcome ",
+                localStorage.getItem('username'),
+                "!")),
         react_1["default"].createElement(core_1.Grid, { container: true, className: "game-container" },
             react_1["default"].createElement(core_1.Grid, { item: true, xs: 12, className: "game-name-heading" },
                 react_1["default"].createElement(core_1.Typography, { component: "p" }, "Memory Game")),

@@ -23,12 +23,15 @@ const loaderStyles = makeStyles({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    height: 'auto',
+    height: '110px',
     width: 'auto',
   },
   colorPrimary: {
     color: themeColors.blue,
     animation: '$changeColors 1s infinite',
+  },
+  colorDefault: {
+    color: themeColors.pink,
   },
   '@keyframes changeColors': {
     '0%': {

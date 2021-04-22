@@ -12,6 +12,11 @@ const Game = ({ startGame }: Props): ReactElement => {
   const [error, setError] = useState(false);
   return (
     <Grid container className={styles.root}>
+      <Grid item xs={12} className="user-name-heading">
+        <Typography component="p">
+          Welcome {localStorage.getItem('username')}!
+        </Typography>
+      </Grid>
       <Grid container className="game-container">
         <Grid item xs={12} className="game-name-heading">
           <Typography component="p">Memory Game</Typography>
